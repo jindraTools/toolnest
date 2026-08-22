@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Animal Age Calculator - Convert Pet Age | ToolNest</title>
+<meta name="description" content="Convert your pet's age into human years with our free Animal Age Calculator. Calculate the approximate age of dogs, cats and other pets.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+
+<div class="calculator">
+
+<h1>🐾 Animal Age Converter</h1>
+
+<p>
+Convert human age into an estimated animal age.
+</p>
+
+
+<label>Human Age</label>
+
+<input
+type="number"
+id="humanAge"
+placeholder="Enter age"
+min="1"
+max="120"
+step="1"
+>
+
+
+<label>Animal</label>
+
+<select id="animal">
+
+<option value="dog">🐶 Dog</option>
+
+<option value="cat">🐱 Cat</option>
+
+<option value="horse">🐴 Horse</option>
+
+<option value="rabbit">🐰 Rabbit</option>
+
+<option value="hamster">🐹 Hamster</option>
+
+</select>
+
+
+<br>
+
+<button class="button" onclick="calculateAnimalAge()">
+🐾 Calculate Animal Age
+</button>
+<button class="button" onclick="resetAnimalAge()">
+🔄 Reset
+</button>
+
+<div id="animalResult" class="result-box"></div>
+
+
+<p style="font-size:13px; margin-top:20px;">
+
+⚠️ This is an approximate comparison.
+Animal ageing varies between breeds and individual animals.
+
+</p>
+
+</div>
+
+<div class="card">
+    <h2>Free Animal Age Calculator</h2>
+
+    <p>
+        Use our free Animal Age Calculator to estimate your pet's age in human years.
+        Choose an animal and enter an age to get a quick approximate comparison.
+    </p>
+
+    <p>
+        Animal ageing can vary between breeds and individual animals, so the result
+        is only an estimate. ToolNest makes it easy to compare the approximate ages
+        of dogs, cats, horses, rabbits and hamsters.
+    </p>
+</div>
+
+
+<script>
+
+function calculateAnimalAge(){
+
+    let humanAge =
+    Number(document.getElementById("humanAge").value);
+
+    let animal =
+    document.getElementById("animal").value;
+
+
+    if(!humanAge || humanAge <= 0){
+
+        alert("Please enter a valid age.");
+
+        return;
+
+    }
+
+
+    let animalAge;
+
+
+    if(animal === "dog"){
+
+        if(humanAge <= 15){
+
+            animalAge = humanAge * 10.5;
+
+        } else {
+
+            animalAge = 15 +
+            (humanAge - 15) * 3.5;
+
+        }
+
+    }
+
+
+    else if(animal === "cat"){
+
+        if(humanAge <= 15){
+
+            animalAge = humanAge * 9;
+
+        } else {
+
+            animalAge = 15 +
+            (humanAge - 15) * 4;
+
+        }
+
+    }
+
+
+    else if(animal === "horse"){
+
+        animalAge = humanAge * 3;
+
+    }
+
+
+    else if(animal === "rabbit"){
+
+        animalAge = humanAge * 8;
+
+    }
+
+
+    else if(animal === "hamster"){
+
+        animalAge = humanAge * 25;
+
+    }
+
+
+    document.getElementById("animalResult").innerHTML =
+
+    "<strong>Estimated Animal Age:</strong><br><br>" +
+
+    animalAge.toFixed(1) +
+
+    " years";
+
+}
+
+function resetAnimalAge(){
+
+    document.getElementById("humanAge").value = "";
+
+    document.getElementById("animal").selectedIndex = 0;
+
+    document.getElementById("animalResult").innerHTML = "";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

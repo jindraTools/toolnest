@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Age Calculator - Calculate Your Age Online | ToolNest</title>
+<meta name="description" content="Calculate your exact age quickly and easily with our free online Age Calculator.">
+
+
+
+</head>
+
+<body>
+<a class="button" href="index.html">🏠 Home</a>
+<div class="calculator">
+
+<h1>🎂 Age Calculator</h1>
+
+<p>Enter your date of birth</p>
+
+<input type="date" id="birthdate">
+
+<br>
+
+<button onclick="calculateAge()">Calculate</button>
+<button onclick="resetAge()">🔄 Reset</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<div class="card">
+    <h2>Free Online Age Calculator</h2>
+
+    <p>
+        Calculate your age quickly and easily with our free online Age Calculator.
+        Enter your date of birth to find out how old you are in seconds.
+    </p>
+
+    <p>
+        Our age calculator provides a simple way to calculate your current age
+        without doing the calculation yourself.
+    </p>
+</div>
+
+
+<script>
+
+function calculateAge() {
+
+let birthdate = new Date(document.getElementById("birthdate").value);
+let today = new Date();
+
+if (!birthdate.getTime()) {
+    document.getElementById("result").innerHTML = "Please enter your birth date.";
+    return;
+}
+
+let age = today.getFullYear() - birthdate.getFullYear();
+
+let month = today.getMonth() - birthdate.getMonth();
+
+if (month < 0 || (month === 0 && today.getDate() < birthdate.getDate())) {
+    age--;
+}
+
+document.getElementById("result").innerHTML =
+"You are " + age + " years old.";
+
+}
+
+function resetAge() {
+
+    document.getElementById("birthdate").value = "";
+    document.getElementById("result").innerHTML = "";
+
+}
+
+</script>
+
+</body>
+</html>

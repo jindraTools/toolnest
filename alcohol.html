@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BAC Calculator - Blood Alcohol Calculator | ToolNest</title>
+<meta name="description" content="Estimate your blood alcohol concentration (BAC) with our free online BAC Calculator. Enter your details to get an estimated result.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+
+<div class="calculator">
+
+<h1>🍺 Alcohol BAC Calculator</h1>
+
+<p>
+Estimate your blood alcohol level from drinks consumed.
+</p>
+
+
+<label>Body Weight (kg)</label>
+
+<input
+type="number"
+id="weight"
+placeholder="Example: 75"
+step="any"
+>
+
+
+<label>Sex</label>
+
+<select id="sex">
+
+<option value="male">Male</option>
+
+<option value="female">Female</option>
+
+</select>
+
+
+<h3>🍺 Beer</h3>
+
+<label>Number of Beers</label>
+
+<input
+type="number"
+id="beerCount"
+value="0"
+min="0"
+step="1"
+>
+
+
+<label>Beer Size (ml)</label>
+
+<input
+type="number"
+id="beerSize"
+value="500"
+min="0"
+>
+
+
+<label>Beer Alcohol (%)</label>
+
+<input
+type="number"
+id="beerPercent"
+value="5"
+min="0"
+step="0.1"
+>
+
+
+<h3>🍷 Wine</h3>
+
+<label>Number of Glasses</label>
+
+<input
+type="number"
+id="wineCount"
+value="0"
+min="0"
+step="1"
+>
+
+
+<label>Wine Size (ml)</label>
+
+<input
+type="number"
+id="wineSize"
+value="175"
+min="0"
+>
+
+
+<label>Wine Alcohol (%)</label>
+
+<input
+type="number"
+id="winePercent"
+value="12"
+min="0"
+step="0.1"
+>
+
+
+<h3>🥃 Spirits</h3>
+
+<label>Number of Shots</label>
+
+<input
+type="number"
+id="shotCount"
+value="0"
+min="0"
+step="1"
+>
+
+
+<label>Shot Size (ml)</label>
+
+<input
+type="number"
+id="shotSize"
+value="25"
+min="0"
+>
+
+
+<label>Spirit Alcohol (%)</label>
+
+<input
+type="number"
+id="shotPercent"
+value="40"
+min="0"
+step="0.1"
+>
+
+
+<label>⏱️ Hours Since Drinking Started</label>
+
+<input
+type="number"
+id="hours"
+value="1"
+min="0"
+step="0.1"
+>
+
+
+<br>
+
+<button
+class="button"
+onclick="calculateBAC()">
+
+🍺 Calculate Estimate
+
+</button>
+
+<button
+class="button"
+onclick="resetBAC()">
+
+🔄 Reset
+
+</button>
+
+
+<div
+id="bacResult"
+class="result-box">
+
+</div>
+
+
+<p style="font-size:13px; margin-top:20px;">
+
+⚠️ This calculator provides only an approximate estimate.
+Actual blood alcohol concentration can vary significantly
+between individuals. Never use this result to decide whether
+you are safe or legal to drive.
+
+</p>
+
+
+</div>
+
+
+<div class="card">
+    <h2>Free Online BAC Calculator</h2>
+
+    <p>
+        Use our free BAC Calculator to estimate blood alcohol concentration
+        based on body weight, sex, drinks consumed and the time since drinking started.
+        The calculator can include beer, wine and spirits.
+    </p>
+
+    <p>
+        The result is only an estimate. Blood alcohol levels vary between individuals
+        and can be affected by many factors. Never rely on an online calculator to
+        decide whether you are safe or legally permitted to drive.
+    </p>
+</div>
+
+
+<script>
+
+function calculateBAC(){
+
+    let weight =
+    Number(document.getElementById("weight").value);
+
+    let sex =
+    document.getElementById("sex").value;
+
+
+    let beerCount =
+    Number(document.getElementById("beerCount").value);
+
+    let beerSize =
+    Number(document.getElementById("beerSize").value);
+
+    let beerPercent =
+    Number(document.getElementById("beerPercent").value);
+
+
+    let wineCount =
+    Number(document.getElementById("wineCount").value);
+
+    let wineSize =
+    Number(document.getElementById("wineSize").value);
+
+    let winePercent =
+    Number(document.getElementById("winePercent").value);
+
+
+    let shotCount =
+    Number(document.getElementById("shotCount").value);
+
+    let shotSize =
+    Number(document.getElementById("shotSize").value);
+
+    let shotPercent =
+    Number(document.getElementById("shotPercent").value);
+
+
+    let hours =
+    Number(document.getElementById("hours").value);
+
+
+    if(!weight || weight <= 0){
+
+        alert("Please enter your body weight.");
+
+        return;
+
+    }
+
+
+    let beerAlcohol =
+    beerCount *
+    beerSize *
+    (beerPercent / 100) *
+    0.789;
+
+
+    let wineAlcohol =
+    wineCount *
+    wineSize *
+    (winePercent / 100) *
+    0.789;
+
+
+    let shotAlcohol =
+    shotCount *
+    shotSize *
+    (shotPercent / 100) *
+    0.789;
+
+
+    let totalAlcohol =
+    beerAlcohol +
+    wineAlcohol +
+    shotAlcohol;
+
+
+    let distribution;
+
+    if(sex === "male"){
+
+        distribution = 0.68;
+
+    } else {
+
+        distribution = 0.55;
+
+    }
+
+
+    let estimatedBAC =
+    (totalAlcohol /
+    (weight * distribution)) -
+    (0.015 * hours);
+
+
+    if(estimatedBAC < 0){
+
+        estimatedBAC = 0;
+
+    }
+
+
+    document.getElementById("bacResult").innerHTML =
+
+    "<strong>Estimated BAC:</strong><br><br>" +
+
+    estimatedBAC.toFixed(2) +
+
+    " ‰<br><br>" +
+
+    "<strong>Total pure alcohol:</strong><br>" +
+
+    totalAlcohol.toFixed(1) +
+
+    " g";
+
+}
+function resetBAC() {
+
+    document.getElementById("weight").value = "";
+    document.getElementById("sex").selectedIndex = 0;
+
+    document.getElementById("beerCount").value = "";
+    document.getElementById("beerSize").value = "";
+    document.getElementById("beerPercent").value = "";
+
+    document.getElementById("wineCount").value = "";
+    document.getElementById("wineSize").value = "";
+    document.getElementById("winePercent").value = "";
+
+    document.getElementById("hours").value = "1";
+
+    document.getElementById("bacResult").innerHTML = "";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

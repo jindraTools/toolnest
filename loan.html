@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Loan Calculator - Free Loan Repayment Calculator | ToolNest</title>
+
+<meta name="description" content="Calculate monthly loan repayments, total repayment amount and interest with our free online Loan Calculator.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+<div class="calculator">
+
+<h1>💰 Loan Calculator</h1>
+
+<p>
+Calculate your estimated monthly loan payments.
+</p>
+
+<label>Loan Amount (£)</label>
+
+<input
+type="number"
+id="loanAmount"
+placeholder="Example: 10000"
+step="0.01"
+>
+
+<label>Interest Rate (%)</label>
+
+<input
+type="number"
+id="interestRate"
+placeholder="Example: 5"
+step="0.01"
+>
+
+<label>Loan Term (Years)</label>
+
+<input
+type="number"
+id="loanYears"
+placeholder="Example: 5"
+step="1"
+>
+
+<br>
+
+<button
+class="button"
+onclick="calculateLoan()">
+
+💰 Calculate Loan
+
+</button>
+
+<button
+class="button"
+onclick="resetLoan()">
+
+🔄 Reset
+
+</button>
+
+<div
+id="loanResult"
+class="result-box">
+
+</div>
+
+</div>
+
+<script>
+
+function calculateLoan(){
+
+    let amount =
+    Number(document.getElementById("loanAmount").value);
+
+    let annualRate =
+    Number(document.getElementById("interestRate").value);
+
+    let years =
+    Number(document.getElementById("loanYears").value);
+
+    if(
+        !amount || amount <= 0 ||
+        !annualRate || annualRate < 0 ||
+        !years || years <= 0
+    ){
+
+        alert("Please enter valid values.");
+
+        return;
+
+    }
+
+    let monthlyRate =
+    annualRate / 100 / 12;
+
+    let payments =
+    years * 12;
+
+    let monthlyPayment;
+
+    if(monthlyRate === 0){
+
+        monthlyPayment =
+        amount / payments;
+
+    }
+
+    else{
+
+        monthlyPayment =
+        amount *
+        monthlyRate *
+        Math.pow(1 + monthlyRate, payments) /
+        (Math.pow(1 + monthlyRate, payments) - 1);
+
+    }
+
+    let totalRepayment =
+    monthlyPayment * payments;
+
+    let totalInterest =
+    totalRepayment - amount;
+
+    document.getElementById("loanResult").innerHTML =
+
+    "<strong>Monthly Payment:</strong><br><br>" +
+
+    "£" + monthlyPayment.toFixed(2) +
+
+    "<br><br>" +
+
+    "<strong>Total Repayment:</strong><br><br>" +
+
+    "£" + totalRepayment.toFixed(2) +
+
+    "<br><br>" +
+
+    "<strong>Total Interest:</strong><br><br>" +
+
+    "£" + totalInterest.toFixed(2);
+
+}
+
+function resetLoan(){
+
+    document.getElementById("loanAmount").value = "";
+
+    document.getElementById("interestRate").value = "";
+
+    document.getElementById("loanYears").value = "";
+
+    document.getElementById("loanResult").innerHTML = "";
+
+}
+
+</script>
+
+</body>
+
+</html>

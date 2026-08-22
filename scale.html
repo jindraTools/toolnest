@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scale Converter - Free Online Model Scale Calculator | ToolNest</title>
+<meta name="description" content="Calculate model dimensions quickly and easily with our free online Scale Converter. Choose a scale and calculate the size of a model from real object dimensions.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+
+<div class="calculator">
+
+<h1>📐 Scale Converter</h1>
+
+<p>
+Calculate model dimensions from real object dimensions.
+</p>
+
+
+<label>Length</label>
+
+<input
+type="number"
+id="length"
+placeholder="Enter length"
+step="any"
+>
+
+
+<label>Width</label>
+
+<input
+type="number"
+id="width"
+placeholder="Enter width"
+step="any"
+>
+
+
+<label>Height</label>
+
+<input
+type="number"
+id="height"
+placeholder="Enter height"
+step="any"
+>
+
+
+<label>Unit</label>
+
+<select id="unit">
+
+<option value="mm">Millimetres (mm)</option>
+
+<option value="cm" selected>
+Centimetres (cm)
+</option>
+
+<option value="m">
+Metres (m)
+</option>
+
+</select>
+
+
+<label>Scale</label>
+
+<select id="scale">
+
+<option value="6">1:6</option>
+
+<option value="12">1:12</option>
+
+<option value="18">1:18</option>
+
+<option value="24">1:24</option>
+
+<option value="32">1:32</option>
+
+<option value="35">1:35</option>
+
+<option value="48">1:48</option>
+
+<option value="72">1:72</option>
+
+<option value="100">1:100</option>
+
+<option value="custom">Custom</option>
+
+</select>
+
+
+<div id="customScaleBox" style="display:none;">
+
+<label>Custom Scale</label>
+
+<input
+type="number"
+id="customScale"
+placeholder="Example: 20"
+step="any"
+>
+
+</div>
+
+
+<br>
+
+
+<button
+class="button"
+onclick="calculateScale()">
+
+📐 Calculate Model Size
+
+</button>
+<button
+class="button"
+onclick="resetScale()">
+
+🔄 Reset
+
+</button>
+
+
+<div
+id="scaleResult"
+class="result-box">
+</div>
+
+
+</div>
+
+<div class="card">
+    <h2>Free Online Scale Converter</h2>
+
+    <p>
+        Calculate model dimensions from real object measurements with our free
+        Scale Converter. Enter the length, width or height of an object and
+        choose a model scale such as 1:18, 1:24, 1:35 or 1:72.
+    </p>
+
+    <p>
+        This tool is useful for model builders, hobbyists and anyone who needs
+        to calculate the approximate size of a scaled model.
+    </p>
+</div>
+
+
+<script>
+
+function calculateScale(){
+
+    let length =
+    Number(document.getElementById("length").value);
+
+    let width =
+    Number(document.getElementById("width").value);
+
+    let height =
+    Number(document.getElementById("height").value);
+
+    let unit =
+    document.getElementById("unit").value;
+
+    let scaleSelect =
+    document.getElementById("scale").value;
+
+
+    if(
+        (!length || length <= 0) &&
+        (!width || width <= 0) &&
+        (!height || height <= 0)
+    ){
+
+        alert("Please enter at least one dimension.");
+
+        return;
+
+    }
+
+
+    let scale;
+
+
+    if(scaleSelect === "custom"){
+
+        scale =
+        Number(
+            document.getElementById("customScale").value
+        );
+
+
+        if(!scale || scale <= 0){
+
+            alert("Please enter a valid custom scale.");
+
+            return;
+
+        }
+
+    }
+
+    else{
+
+        scale =
+        Number(scaleSelect);
+
+    }
+
+
+    let result = "";
+
+
+    if(length > 0){
+
+        result +=
+        "<strong>Length:</strong> " +
+        (length / scale).toFixed(3) +
+        " " + unit + "<br><br>";
+
+    }
+
+
+    if(width > 0){
+
+        result +=
+        "<strong>Width:</strong> " +
+        (width / scale).toFixed(3) +
+        " " + unit + "<br><br>";
+
+    }
+
+
+    if(height > 0){
+
+        result +=
+        "<strong>Height:</strong> " +
+        (height / scale).toFixed(3) +
+        " " + unit + "<br><br>";
+
+    }
+
+
+    result +=
+    "<strong>Scale:</strong> 1:" +
+    scale;
+
+
+    document.getElementById("scaleResult").innerHTML =
+    result;
+
+}
+function resetScale() {
+
+    document.getElementById("length").value = "";
+    document.getElementById("width").value = "";
+    document.getElementById("height").value = "";
+
+    document.getElementById("customScale").value = "";
+
+    document.getElementById("scaleResult").innerHTML = "";
+
+}
+
+document
+.getElementById("scale")
+.addEventListener("change", function(){
+
+    if(this.value === "custom"){
+
+        document
+        .getElementById("customScaleBox")
+        .style.display = "block";
+
+    }
+
+    else{
+
+        document
+        .getElementById("customScaleBox")
+        .style.display = "none";
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>

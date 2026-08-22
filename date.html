@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Date Calculator - Calculate Dates Online | ToolNest</title>
+<meta name="description" content="Calculate dates and the difference between dates quickly and easily with our free online Date Calculator.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<a class="button" href="index.html">🏠 Home</a>
+
+
+<h1 style="text-align:center;">📅 Date Calculator</h1>
+
+<p class="intro-text" style="text-align:center;">
+Calculate the difference between two dates.
+</p>
+
+
+<div class="calculator">
+
+
+<label>Start Date</label>
+
+<input type="date" id="startDate">
+
+
+<label>End Date</label>
+
+<input type="date" id="endDate">
+
+
+<button class="button" onclick="calculateDate()">
+Calculate
+</button>
+<button class="button" onclick="resetDate()">
+Reset
+</button>
+
+
+<div id="result"></div>
+
+</div>
+
+<div class="card">
+    <h2>Free Online Date Calculator</h2>
+
+    <p>
+        Use our free Date Calculator to find the difference between two dates.
+        Quickly calculate the number of days, weeks and years between any two dates.
+    </p>
+
+    <p>
+        Whether you are calculating the time between important events,
+        planning a deadline or simply comparing two dates, ToolNest makes
+        date calculations quick and easy.
+    </p>
+</div>
+
+</div>
+
+<script>
+
+function calculateDate(){
+
+let start = new Date(document.getElementById("startDate").value);
+let end = new Date(document.getElementById("endDate").value);
+
+let difference = end - start;
+
+let days = difference / (1000 * 60 * 60 * 24);
+
+let totalDays = Math.abs(Math.floor(days));
+
+let weeks = Math.floor(totalDays / 7);
+
+let years = Math.floor(totalDays / 365);
+
+document.getElementById("result").innerHTML =
+"Difference:<br>" +
+totalDays + " days<br>" +
+weeks + " weeks<br>" +
+years + " years";
+
+}
+
+
+function resetDate(){
+
+document.getElementById("startDate").value = "";
+document.getElementById("endDate").value = "";
+document.getElementById("result").innerHTML = "";
+
+}
+
+</script>
+</body>
+
+</html>

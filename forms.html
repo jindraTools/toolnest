@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contract & Form Generator - Free Online Forms | ToolNest</title>
+<meta name="description" content="Create contracts and useful forms quickly with our free online Contract and Form Generator.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+
+<div class="calculator">
+
+<h1>📝 Contract & Form Generator</h1>
+
+<p>
+Create printable contracts and useful forms.
+</p>
+
+
+
+
+<select id="documentType" onchange="showForm()">
+
+<option value="">-- Select Document --</option>
+
+<option value="sale">🚗 Vehicle Sale Agreement</option>
+
+<option value="loan">💰 Loan Agreement</option>
+
+<option value="receipt">🧾 Payment Receipt</option>
+
+<option value="employment">📄 Employment Contract</option>
+
+<option value="termination">✋ Employment Termination Letter</option>
+
+<option value="gift">🎁 Gift Agreement</option>
+
+<option value="power">📜 Power of Attorney</option>
+
+<option value="custom">📝 Simple Custom Form</option>
+
+</select>
+
+
+<div id="formArea"></div>
+
+
+<div id="documentResult"></div>
+
+</div>
+
+
+<script>
+
+function showForm(){
+
+    let type =
+    document.getElementById("documentType").value;
+
+    let formArea =
+    document.getElementById("formArea");
+
+    document.getElementById("documentResult").innerHTML = "";
+
+
+    if(type === "sale"){
+
+        formArea.innerHTML = `
+
+        <h3>🚗 Vehicle Sale Agreement</h3>
+
+        <label>Seller Name</label>
+
+        <input type="text" id="seller">
+
+
+        <label>Buyer Name</label>
+
+        <input type="text" id="buyer">
+
+
+        <label>Vehicle</label>
+
+        <input type="text" id="vehicle"
+        placeholder="Make and model">
+
+
+        <label>Registration Number</label>
+
+        <input type="text" id="registration">
+
+
+        <label>Sale Price (£)</label>
+
+        <input type="number" id="price"
+        step="0.01">
+
+
+        <label>Date</label>
+
+        <input type="date" id="saleDate">
+
+
+        <br>
+
+        <button class="button"
+        onclick="generateSale()">
+
+        📄 Generate Agreement
+
+        </button>
+
+        `;
+
+    }
+
+
+    else if(type === "loan"){
+
+        formArea.innerHTML = `
+
+        <h3>💰 Loan Agreement</h3>
+
+        <label>Lender Name</label>
+
+        <input type="text" id="lender">
+
+
+        <label>Borrower Name</label>
+
+        <input type="text" id="borrower">
+
+
+        <label>Loan Amount (£)</label>
+
+        <input type="number" id="loanAmount"
+        step="0.01">
+
+
+        <label>Repayment Date</label>
+
+        <input type="date" id="repaymentDate">
+
+
+        <label>Additional Terms</label>
+
+        <textarea id="loanTerms"
+        rows="5"
+        style="width:100%; padding:12px; border-radius:10px; border:2px solid #e2e8f0;">
+        </textarea>
+
+
+        <br>
+
+        <button class="button"
+        onclick="generateLoan()">
+
+        📄 Generate Agreement
+
+        </button>
+
+        `;
+
+    }
+ 
+else if(type === "receipt"){
+
+    formArea.innerHTML = `
+
+    <h3>🧾 Payment Receipt</h3>
+
+    <label>Received From</label>
+
+    <input type="text" id="receivedFrom">
+
+    <label>Amount (£)</label>
+
+    <input type="number" id="receiptAmount" step="0.01">
+
+    <label>Payment For</label>
+
+    <input type="text" id="paymentFor">
+
+    <label>Date</label>
+
+    <input type="date" id="receiptDate">
+
+    <br>
+
+    <button class="button"
+    onclick="generateReceipt()">
+
+    🧾 Generate Receipt
+
+    </button>
+
+    `;
+
+}
+
+
+    else if(type === "employment"){
+
+    formArea.innerHTML = `
+
+    <h3>📄 Employment Contract</h3>
+
+    <label>Employer Name</label>
+
+    <input type="text" id="employer">
+
+
+    <label>Employee Name</label>
+
+    <input type="text" id="employee">
+
+
+    <label>Job Title</label>
+
+    <input type="text" id="jobTitle">
+
+
+    <label>Start Date</label>
+
+    <input type="date" id="startDate">
+
+
+    <label>Work Location</label>
+
+    <input type="text" id="workLocation">
+
+
+    <label>Salary (£)</label>
+
+    <input type="number" id="salary" step="0.01">
+
+
+    <label>Working Hours</label>
+
+    <input type="text" id="workingHours"
+    placeholder="e.g. 40 hours per week">
+
+
+    <label>Additional Terms</label>
+
+    <textarea id="employmentTerms"
+    rows="6"
+    style="width:100%; padding:12px; border-radius:10px; border:2px solid #e2e8f0;"></textarea>
+
+
+    <br>
+
+    <button class="button"
+    onclick="generateEmployment()">
+
+    📄 Generate Employment Contract
+
+    </button>
+
+    `;
+
+}
+else if(type === "termination"){
+
+    formArea.innerHTML = `
+
+    <h3>✋ Employment Termination Letter</h3>
+
+    <label>Employee Name</label>
+
+    <input type="text" id="terminationEmployee">
+
+
+    <label>Employer Name</label>
+
+    <input type="text" id="terminationEmployer">
+
+
+    <label>Job Title</label>
+
+    <input type="text" id="terminationJob">
+
+
+    <label>Notice Date</label>
+
+    <input type="date" id="noticeDate">
+
+
+    <label>Last Working Day</label>
+
+    <input type="date" id="lastWorkingDay">
+
+
+    <label>Reason / Additional Information</label>
+
+    <textarea id="terminationReason"
+    rows="6"
+    style="width:100%; padding:12px; border-radius:10px; border:2px solid #e2e8f0;"></textarea>
+
+
+    <br>
+
+    <button class="button"
+    onclick="generateTermination()">
+
+    📄 Generate Termination Letter
+
+    </button>
+
+    `;
+
+}
+else if(type === "gift"){
+
+    formArea.innerHTML = `
+
+    <h3>🎁 Gift Agreement</h3>
+
+    <label>Donor Name</label>
+
+    <input type="text" id="donor">
+
+
+    <label>Recipient Name</label>
+
+    <input type="text" id="recipient">
+
+
+    <label>Description of Gift</label>
+
+    <textarea id="giftDescription"
+    rows="5"
+    style="width:100%; padding:12px; border-radius:10px; border:2px solid #e2e8f0;"></textarea>
+
+
+    <label>Estimated Value (£)</label>
+
+    <input type="number" id="giftValue" step="0.01">
+
+
+    <label>Date</label>
+
+    <input type="date" id="giftDate">
+
+
+    <label>Additional Terms</label>
+
+    <textarea id="giftTerms"
+    rows="5"
+    style="width:100%; padding:12px; border-radius:10px; border:2px solid #e2e8f0;"></textarea>
+
+
+    <br>
+
+    <button class="button"
+    onclick="generateGift()">
+
+    📄 Generate Gift Agreement
+
+    </button>
+
+    `;
+
+}
+
+else if(type === "power"){
+
+    formArea.innerHTML = `
+
+    <h3>📜 Power of Attorney</h3>
+
+    <label>Principal Name</label>
+
+    <input type="text" id="principal">
+
+
+    <label>Attorney / Representative Name</label>
+
+    <input type="text" id="attorney">
+
+
+    <label>Purpose of Power of Attorney</label>
+
+    <textarea id="powerPurpose"
+    rows="5"
+    style="width:100%; padding:12px; border-radius:10px; border:2px solid #e2e8f0;"></textarea>
+
+
+    <label>Valid From</label>
+
+    <input type="date" id="powerFrom">
+
+
+    <label>Valid Until</label>
+
+    <input type="date" id="powerUntil">
+
+
+    <label>Additional Conditions</label>
+
+    <textarea id="powerTerms"
+    rows="5"
+    style="width:100%; padding:12px; border-radius:10px; border:2px solid #e2e8f0;"></textarea>
+
+
+    <br>
+
+    <button class="button"
+    onclick="generatePower()">
+
+    📄 Generate Power of Attorney
+
+    </button>
+
+    `;
+
+}
+
+    else if(type === "custom"){
+
+        formArea.innerHTML = `
+
+        <h3>📝 Simple Custom Form</h3>
+
+        <label>Title</label>
+
+        <input type="text" id="customTitle">
+
+
+        <label>Name</label>
+
+        <input type="text" id="customName">
+
+
+        <label>Details</label>
+
+        <textarea id="customDetails"
+        rows="8"
+        style="width:100%; padding:12px; border-radius:10px; border:2px solid #e2e8f0;">
+        </textarea>
+
+
+        <br>
+
+        <button class="button"
+        onclick="generateCustom()">
+
+        📄 Generate Form
+
+        </button>
+
+        `;
+
+    }
+
+}
+
+
+
+
+
+
+function generateReceipt(){
+
+    let name =
+    document.getElementById("receivedFrom").value;
+
+    let amount =
+    document.getElementById("receiptAmount").value;
+
+    let reason =
+    document.getElementById("paymentFor").value;
+
+    let date =
+    document.getElementById("receiptDate").value;
+
+
+    document.getElementById("documentResult").innerHTML = `
+
+    <div class="result-box">
+
+    <h2>🧾 Payment Receipt</h2>
+
+    <p>
+    Received from: <strong>${name}</strong>
+    </p>
+
+    <p>
+    Amount: <strong>£${amount}</strong>
+    </p>
+
+    <p>
+    Payment for: <strong>${reason}</strong>
+    </p>
+
+    <p>
+    Date: <strong>${date}</strong>
+    </p>
+
+    <br>
+
+    Signature: ______________________________
+
+    <br><br>
+
+    <button class="button"
+    onclick="window.print()">
+
+    🖨️ Print / Save PDF
+
+    </button>
+
+    </div>
+
+    `;
+
+}
+  
+function generatePower(){
+
+    let principal =
+    document.getElementById("principal").value;
+
+    let attorney =
+    document.getElementById("attorney").value;
+
+    let purpose =
+    document.getElementById("powerPurpose").value;
+
+    let from =
+    document.getElementById("powerFrom").value;
+
+    let until =
+    document.getElementById("powerUntil").value;
+
+    let terms =
+    document.getElementById("powerTerms").value;
+
+
+    document.getElementById("documentResult").innerHTML = `
+
+    <div class="result-box">
+
+    <h2>📜 Power of Attorney</h2>
+
+    <p>
+    <strong>Principal:</strong> ${principal}
+    </p>
+
+    <p>
+    <strong>Attorney / Representative:</strong> ${attorney}
+    </p>
+
+    <p>
+    <strong>Purpose:</strong>
+    </p>
+
+    <p>${purpose}</p>
+
+    <p>
+    <strong>Valid From:</strong> ${from}
+    </p>
+
+    <p>
+    <strong>Valid Until:</strong> ${until}
+    </p>
+
+    <p>
+    <strong>Additional Conditions:</strong>
+    </p>
+
+    <p>${terms}</p>
+
+    <br>
+
+    <p>
+    Principal Signature: __________________________
+    </p>
+
+    <p>
+    Attorney / Representative Signature: __________
+    </p>
+
+    <br>
+
+    <button class="button"
+    onclick="window.print()">
+
+    🖨️ Print / Save PDF
+
+    </button>
+
+    </div>
+
+    `;
+
+}
+
+function generateGift(){
+
+    let donor =
+    document.getElementById("donor").value;
+
+    let recipient =
+    document.getElementById("recipient").value;
+
+    let description =
+    document.getElementById("giftDescription").value;
+
+    let value =
+    document.getElementById("giftValue").value;
+
+    let date =
+    document.getElementById("giftDate").value;
+
+    let terms =
+    document.getElementById("giftTerms").value;
+
+
+    document.getElementById("documentResult").innerHTML = `
+
+    <div class="result-box">
+
+    <h2>🎁 Gift Agreement</h2>
+
+    <p>
+    This agreement records the transfer of the gift
+    described below.
+    </p>
+
+    <p>
+    <strong>Donor:</strong> ${donor}
+    </p>
+
+    <p>
+    <strong>Recipient:</strong> ${recipient}
+    </p>
+
+    <p>
+    <strong>Gift:</strong> ${description}
+    </p>
+
+    <p>
+    <strong>Estimated Value:</strong> £${value}
+    </p>
+
+    <p>
+    <strong>Date:</strong> ${date}
+    </p>
+
+    <p>
+    <strong>Additional Terms:</strong>
+    </p>
+
+    <p>${terms}</p>
+
+    <br>
+
+    <p>
+    Donor Signature: __________________________
+    </p>
+
+    <p>
+    Recipient Signature: ______________________
+    </p>
+
+    <br>
+
+    <button class="button"
+    onclick="window.print()">
+
+    🖨️ Print / Save PDF
+
+    </button>
+
+    </div>
+
+    `;
+
+}
+
+function generateTermination(){
+
+    let employee =
+    document.getElementById("terminationEmployee").value;
+
+    let employer =
+    document.getElementById("terminationEmployer").value;
+
+    let job =
+    document.getElementById("terminationJob").value;
+
+    let noticeDate =
+    document.getElementById("noticeDate").value;
+
+    let lastDay =
+    document.getElementById("lastWorkingDay").value;
+
+    let reason =
+    document.getElementById("terminationReason").value;
+
+
+    document.getElementById("documentResult").innerHTML = `
+
+    <div class="result-box">
+
+    <h2>✋ Employment Termination Letter</h2>
+
+    <p><strong>Date:</strong> ${noticeDate}</p>
+
+    <p>
+    Dear ${employee},
+    </p>
+
+    <p>
+    This letter concerns the termination of your employment
+    with <strong>${employer}</strong>.
+    </p>
+
+    <p>
+    Position: <strong>${job}</strong>
+    </p>
+
+    <p>
+    Last Working Day:
+    <strong>${lastDay}</strong>
+    </p>
+
+    <p>
+    Additional Information:
+    </p>
+
+    <p>${reason}</p>
+
+    <br>
+
+    <p>
+    Employer Signature: __________________________
+    </p>
+
+    <p>
+    Employee Signature: __________________________
+    </p>
+
+    <br>
+
+    <button class="button"
+    onclick="window.print()">
+
+    🖨️ Print / Save PDF
+
+    </button>
+
+    </div>
+
+    `;
+
+}
+
+function generateEmployment(){
+
+    let employer =
+    document.getElementById("employer").value;
+
+    let employee =
+    document.getElementById("employee").value;
+
+    let jobTitle =
+    document.getElementById("jobTitle").value;
+
+    let startDate =
+    document.getElementById("startDate").value;
+
+    let workLocation =
+    document.getElementById("workLocation").value;
+
+    let salary =
+    document.getElementById("salary").value;
+
+    let workingHours =
+    document.getElementById("workingHours").value;
+
+    let terms =
+    document.getElementById("employmentTerms").value;
+
+
+    document.getElementById("documentResult").innerHTML = `
+
+    <div class="result-box">
+
+    <h2>📄 Employment Contract</h2>
+
+    <p>
+    This employment agreement is made between:
+    </p>
+
+    <p>
+    <strong>Employer:</strong> ${employer}
+    </p>
+
+    <p>
+    <strong>Employee:</strong> ${employee}
+    </p>
+
+    <p>
+    <strong>Job Title:</strong> ${jobTitle}
+    </p>
+
+    <p>
+    <strong>Start Date:</strong> ${startDate}
+    </p>
+
+    <p>
+    <strong>Work Location:</strong> ${workLocation}
+    </p>
+
+    <p>
+    <strong>Salary:</strong> £${salary}
+    </p>
+
+    <p>
+    <strong>Working Hours:</strong> ${workingHours}
+    </p>
+
+    <p>
+    <strong>Additional Terms:</strong>
+    </p>
+
+    <p>${terms}</p>
+
+    <br>
+
+    <p>
+    Employer Signature: __________________________
+    </p>
+
+    <p>
+    Employee Signature: __________________________
+    </p>
+
+    <br>
+
+    <button class="button"
+    onclick="window.print()">
+
+    🖨️ Print / Save PDF
+
+    </button>
+
+    </div>
+
+    `;
+
+}
+
+function generateCustom(){
+
+    let title =
+    document.getElementById("customTitle").value;
+
+    let name =
+    document.getElementById("customName").value;
+
+    let details =
+    document.getElementById("customDetails").value;
+
+
+    document.getElementById("documentResult").innerHTML = `
+
+    <div class="result-box">
+
+    <h2>📝 ${title}</h2>
+
+    <p>
+    <strong>Name:</strong> ${name}
+    </p>
+
+    <p>
+    ${details}
+    </p>
+
+    <br>
+
+    Signature: ______________________________
+
+    <br><br>
+
+    <button class="button"
+    onclick="window.print()">
+
+    🖨️ Print / Save PDF
+
+    </button>
+
+    </div>
+
+    `;
+
+  
+
+}
+
+
+
+function generateSale(){
+
+let seller = document.getElementById("seller").value;
+let buyer = document.getElementById("buyer").value;
+let vehicle = document.getElementById("vehicle").value;
+let registration = document.getElementById("registration").value;
+let price = document.getElementById("price").value;
+let date = document.getElementById("saleDate").value;
+
+document.getElementById("documentResult").innerHTML = `
+
+<div class="result-box">
+
+<h2>🚗 Vehicle Sale Agreement</h2>
+
+<p>
+This agreement confirms the sale of the vehicle
+described below.
+</p>
+
+<p><strong>Seller:</strong> ${seller}</p>
+
+<p><strong>Buyer:</strong> ${buyer}</p>
+
+<p><strong>Vehicle:</strong> ${vehicle}</p>
+
+<p><strong>Registration:</strong> ${registration}</p>
+
+<p><strong>Sale Price:</strong> £${price}</p>
+
+<p><strong>Date:</strong> ${date}</p>
+
+<br>
+
+<p>Seller Signature: __________________________</p>
+
+<p>Buyer Signature: ___________________________</p>
+
+<br>
+
+<button class="button"
+onclick="window.print()">
+
+🖨️ Print / Save PDF
+
+</button>
+
+</div>
+
+`;
+
+}
+
+function generateLoan(){
+
+    let lender = document.getElementById("lender").value;
+    let borrower = document.getElementById("borrower").value;
+    let amount = document.getElementById("loanAmount").value;
+    let date = document.getElementById("repaymentDate").value;
+    let terms = document.getElementById("loanTerms").value;
+
+    document.getElementById("documentResult").innerHTML = `
+
+    <div class="result-box">
+
+    <h2>💰 Loan Agreement</h2>
+
+    <p>
+    This agreement confirms that a loan has been provided
+    under the terms below.
+    </p>
+
+    <p><strong>Lender:</strong> ${lender}</p>
+
+    <p><strong>Borrower:</strong> ${borrower}</p>
+
+    <p><strong>Loan Amount:</strong> £${amount}</p>
+
+    <p><strong>Repayment Date:</strong> ${date}</p>
+
+    <p><strong>Additional Terms:</strong></p>
+
+    <p>${terms}</p>
+
+    <br>
+
+    <p>Lender Signature: __________________________</p>
+
+    <p>Borrower Signature: ________________________</p>
+
+    <br>
+
+    <button class="button" onclick="window.print()">
+    🖨️ Print / Save PDF
+    </button>
+
+    </div>
+
+    `;
+
+}
+
+function generateReceipt(){
+
+    let name = document.getElementById("receivedFrom").value;
+    let amount = document.getElementById("receiptAmount").value;
+    let reason = document.getElementById("paymentFor").value;
+    let date = document.getElementById("receiptDate").value;
+
+    document.getElementById("documentResult").innerHTML = `
+
+    <div class="result-box">
+
+    <h2>🧾 Payment Receipt</h2>
+
+    <p>
+    Received from: <strong>${name}</strong>
+    </p>
+
+    <p>
+    Amount: <strong>£${amount}</strong>
+    </p>
+
+    <p>
+    Payment for: <strong>${reason}</strong>
+    </p>
+
+    <p>
+    Date: <strong>${date}</strong>
+    </p>
+
+    <br>
+
+    <p>
+    Signature: ______________________________
+    </p>
+
+    <br>
+
+    <button class="button" onclick="window.print()">
+    🖨️ Print / Save PDF
+    </button>
+
+    </div>
+
+    `;
+
+}
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+
+</html>

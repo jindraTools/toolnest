@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wi-Fi QR Code Generator - Free Online | ToolNest</title>
+<meta name="description" content="Create a QR code for your Wi-Fi network quickly and easily with our free Wi-Fi QR Code Generator.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+<div class="calculator">
+
+<h1>📶 Wi-Fi QR Generator</h1>
+
+<p>Create a QR code for your Wi-Fi network.</p>
+
+<label>Wi-Fi Network Name (SSID)</label>
+
+<input type="text" id="ssid" placeholder="Enter Wi-Fi name">
+
+
+<label>Wi-Fi Password</label>
+
+<input type="text" id="wifiPassword" placeholder="Enter Wi-Fi password">
+
+
+<label>Security</label>
+
+<select id="security">
+
+<option value="WPA">WPA / WPA2</option>
+
+<option value="WEP">WEP</option>
+
+<option value="nopass">No Password</option>
+
+</select>
+
+<br>
+
+<button class="button" onclick="generateWiFiQR()">
+📱 Generate QR Code
+</button>
+
+<button class="button" onclick="downloadWiFiQR()">
+📥 Download QR Code
+</button>
+
+<button class="button" onclick="resetWiFi()">
+🔄 Reset
+</button>
+
+<div id="wifiResult" class="result-box"></div>
+
+</div>
+
+<div class="card">
+    <h2>Free Wi-Fi QR Code Generator</h2>
+
+    <p>
+        Create a free Wi-Fi QR code with our online Wi-Fi QR Generator.
+        Enter your Wi-Fi network name, password and security type to create
+        a QR code that can be scanned by a smartphone.
+    </p>
+
+    <p>
+        Sharing Wi-Fi becomes quick and easy. Guests can scan the QR code
+        instead of typing a long Wi-Fi password manually.
+    </p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script>
+
+function generateWiFiQR(){
+
+    let ssid = document.getElementById("ssid").value;
+
+    let password = document.getElementById("wifiPassword").value;
+
+    let security = document.getElementById("security").value;
+
+    if(ssid === ""){
+
+        alert("Please enter your Wi-Fi network name.");
+
+        return;
+
+    }
+
+    if(security !== "nopass" && password === ""){
+
+        alert("Please enter your Wi-Fi password.");
+
+        return;
+
+    }
+
+    let wifiString =
+    `WIFI:T:${security};S:${ssid};P:${password};;`;
+
+    let result = document.getElementById("wifiResult");
+
+    result.innerHTML = "";
+
+    new QRCode(result, {
+
+        text: wifiString,
+
+        width: 200,
+
+        height: 200
+
+    });
+
+}
+
+
+function downloadWiFiQR(){
+
+    let qrImage = document.querySelector("#wifiResult img");
+
+    if(!qrImage){
+
+        alert("Generate a QR Code first!");
+
+        return;
+
+    }
+
+    let link = document.createElement("a");
+
+    link.href = qrImage.src;
+
+    link.download = "ToolNest-WiFi-QR-Code.png";
+
+    link.click();
+
+}
+
+
+function resetWiFi(){
+
+    document.getElementById("ssid").value = "";
+
+    document.getElementById("wifiPassword").value = "";
+
+    document.getElementById("security").value = "WPA";
+
+    document.getElementById("wifiResult").innerHTML = "";
+
+}
+
+</script>
+
+</body>
+
+</html>

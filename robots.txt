@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jindratools.github.io/toolnest/sitemap.xml

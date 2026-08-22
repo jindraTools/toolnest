@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Digital Business Card Generator - Free vCard | ToolNest</title>
+<meta name="description" content="Create a digital business card with our free vCard Generator. Easily create and share your contact details online.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+<div class="calculator">
+
+<h1>👤 Digital Business Card</h1>
+
+<p>Create a digital contact QR code.</p>
+
+<label>First Name</label>
+<input type="text" id="firstName">
+
+<label>Last Name</label>
+<input type="text" id="lastName">
+
+<label>Company</label>
+<input type="text" id="company">
+
+<label>Job Title</label>
+<input type="text" id="jobTitle">
+
+<label>Phone</label>
+<input type="text" id="phone">
+
+<label>Email</label>
+<input type="email" id="email">
+
+<label>Website</label>
+<input type="text" id="website">
+
+<br>
+
+<button class="button" onclick="generateVCard()">
+📱 Generate QR Code
+</button>
+
+<button class="button" onclick="copyVCard()">
+📋 Copy Contact
+</button>
+
+<button class="button" onclick="downloadVCardQR()">
+📥 Download QR Code
+</button>
+
+<button class="button" onclick="resetVCard()">
+🔄 Reset
+</button>
+
+<div id="vcardResult" class="result-box"></div>
+
+</div>
+
+<div class="card">
+    <h2>Free Digital Business Card Generator</h2>
+
+    <p>
+        Create a free digital business card with our vCard Generator.
+        Enter your contact details and generate a QR code that can be scanned
+        by a smartphone.
+    </p>
+
+    <p>
+        Add your name, company, job title, phone number, email and website.
+        You can copy your contact details or download the generated QR code
+        for easy sharing.
+    </p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script>
+
+function generateVCard(){
+
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let company = document.getElementById("company").value;
+    let jobTitle = document.getElementById("jobTitle").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
+    let website = document.getElementById("website").value;
+
+    if(firstName === "" && lastName === ""){
+
+        alert("Please enter a name.");
+
+        return;
+
+    }
+
+    let vcard =
+`BEGIN:VCARD
+VERSION:3.0
+N:${lastName};${firstName}
+FN:${firstName} ${lastName}
+ORG:${company}
+TITLE:${jobTitle}
+TEL:${phone}
+EMAIL:${email}
+URL:${website}
+END:VCARD`;
+
+    let result = document.getElementById("vcardResult");
+
+    result.innerHTML = "";
+
+    new QRCode(result, {
+
+        text: vcard,
+        width: 200,
+        height: 200
+
+    });
+
+}
+
+function resetVCard(){
+
+    document.getElementById("firstName").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("company").value = "";
+    document.getElementById("jobTitle").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("website").value = "";
+
+    document.getElementById("vcardResult").innerHTML = "";
+
+}
+
+function copyVCard(){
+
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let company = document.getElementById("company").value;
+    let jobTitle = document.getElementById("jobTitle").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
+    let website = document.getElementById("website").value;
+
+    if(firstName === "" && lastName === ""){
+        alert("Please enter a name.");
+        return;
+    }
+
+    let contact =
+`Name: ${firstName} ${lastName}
+Company: ${company}
+Job Title: ${jobTitle}
+Phone: ${phone}
+Email: ${email}
+Website: ${website}`;
+
+    navigator.clipboard.writeText(contact);
+
+    alert("Contact copied!");
+}
+
+
+function downloadVCardQR(){
+
+    let qrImage = document.querySelector("#vcardResult img");
+
+    if(!qrImage){
+        alert("Generate the QR code first!");
+        return;
+    }
+
+    let link = document.createElement("a");
+
+    link.href = qrImage.src;
+    link.download = "digital-business-card.png";
+
+    link.click();
+}
+
+</script>
+
+</body>
+
+</html>

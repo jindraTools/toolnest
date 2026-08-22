@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Number Generator - Free Online Random Number Generator | ToolNest</title>
+<meta name="description" content="Generate random numbers quickly and easily with our free online Random Number Generator. Choose a minimum, maximum and quantity.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<a class="button" href="index.html">🏠 Home</a>
+
+
+<div class="calculator">
+
+
+<h1>🔢 Random Number Generator</h1>
+
+<p>Generate random numbers within your chosen range.</p>
+
+
+<label>Minimum Number</label>
+
+<input type="number" id="minimum" value="1">
+
+
+<label>Maximum Number</label>
+
+<input type="number" id="maximum" value="100">
+
+
+<label>How Many Numbers?</label>
+
+<input type="number" id="quantity" value="5" min="1">
+
+
+<br>
+
+
+<button class="button" onclick="generateRandomNumbers()">
+🎲 Generate Numbers
+</button>
+
+<button class="button" onclick="copyRandomNumbers()">
+📋 Copy Numbers
+</button>
+
+<button class="button" onclick="resetRandomNumbers()">
+🔄 Reset
+</button>
+
+
+<div id="randomResult" class="result-box"></div>
+
+
+</div>
+
+<div class="card">
+    <h2>Free Online Random Number Generator</h2>
+
+    <p>
+        Generate random numbers quickly and easily with our free Random Number Generator.
+        Choose a minimum number, maximum number and how many random numbers you need.
+    </p>
+
+    <p>
+        The generator creates unique random numbers within your selected range.
+        It can be useful for games, raffles, decisions, testing and everyday number selection.
+    </p>
+</div>
+
+</div>
+
+
+<script>
+
+function generateRandomNumbers(){
+
+let minimum = Number(document.getElementById("minimum").value);
+
+let maximum = Number(document.getElementById("maximum").value);
+
+let quantity = Number(document.getElementById("quantity").value);
+
+
+if(minimum >= maximum){
+
+alert("Maximum number must be greater than minimum number.");
+
+return;
+
+}
+
+
+let availableNumbers = [];
+
+for(let i = minimum; i <= maximum; i++){
+
+availableNumbers.push(i);
+
+}
+
+
+if(quantity > availableNumbers.length){
+
+alert("There are not enough numbers in this range.");
+
+return;
+
+}
+
+
+let result = [];
+
+
+while(result.length < quantity){
+
+let randomIndex = Math.floor(Math.random() * availableNumbers.length);
+
+result.push(availableNumbers[randomIndex]);
+
+availableNumbers.splice(randomIndex, 1);
+
+}
+
+
+result.sort((a,b) => a-b);
+
+
+document.getElementById("randomResult").innerHTML =
+"Your Numbers:<br><br>" +
+result.map(n =>
+`<span style="
+display:inline-flex;
+justify-content:center;
+align-items:center;
+width:50px;
+height:50px;
+margin:6px;
+border-radius:50%;
+background:#2563eb;
+color:white;
+font-size:20px;
+font-weight:700;
+box-shadow:0 4px 10px rgba(0,0,0,.15);
+">${n}</span>`
+).join(" ");
+
+}
+
+
+function resetRandomNumbers(){
+
+    document.getElementById("randomResult").innerHTML = "";
+
+    document.getElementById("minimum").value = 1;
+
+    document.getElementById("maximum").value = 100;
+
+    document.getElementById("quantity").value = 5;
+
+}
+
+
+function copyRandomNumbers(){
+
+    let balls = document.querySelectorAll("#randomResult span");
+
+    if(balls.length === 0){
+
+        alert("Generate numbers first!");
+
+        return;
+
+    }
+
+    let numbers = [];
+
+    balls.forEach(ball => {
+
+        numbers.push(ball.innerText);
+
+    });
+
+    navigator.clipboard.writeText(numbers.join(" "));
+
+    alert("Numbers copied!");
+
+}
+
+</script>
+
+
+</body>
+
+</html>

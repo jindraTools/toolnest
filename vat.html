@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VAT Calculator - Free Online VAT Calculator | ToolNest</title>
+<meta name="description" content="Calculate VAT quickly and easily with our free online VAT Calculator. Add or remove VAT from prices in seconds.">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="calculator">
+
+<h1>💷 VAT Calculator</h1>
+
+<p>Calculate VAT quickly and easily.</p>
+
+<input type="number" id="amount" placeholder="Enter amount">
+
+<br><br>
+
+<select id="vatRate">
+    <option value="20">20% VAT</option>
+    <option value="5">5% VAT</option>
+    <option value="0">0% VAT</option>
+</select>
+
+<br><br>
+
+<button onclick="addVAT()">Add VAT</button>
+
+<button onclick="removeVAT()">Remove VAT</button>
+<button onclick="resetVAT()">Reset</button>
+
+<div id="result" class="result-box"></div>
+
+<br>
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+<div class="card">
+    <h2>Free Online VAT Calculator</h2>
+
+    <p>
+        Calculate VAT quickly and easily with our free VAT Calculator.
+        Add VAT to a price or remove VAT to find the original amount.
+    </p>
+
+    <p>
+        Choose the VAT rate you need and enter an amount to calculate
+        the VAT-inclusive or VAT-exclusive price in seconds.
+    </p>
+</div>
+
+<script src="vat.js"></script>
+
+</body>
+</html>

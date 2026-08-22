@@ -1,0 +1,116 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+
+<title>Percentage Calculator - Free Online Percentage Calculator | ToolNest</title>
+<meta name="description" content="Calculate percentages quickly and easily with our free online Percentage Calculator.">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+<div class="calculator">
+
+<h1>📊 Percentage Calculator</h1>
+
+<p>Calculate a percentage of a number.</p>
+
+<input
+id="percent"
+type="number"
+placeholder="Percentage (%)"
+>
+
+<input
+id="number"
+type="number"
+placeholder="Number"
+>
+
+<br>
+
+<button class="button" onclick="calculate()">
+Calculate
+</button>
+
+<button class="button" onclick="resetCalculator()">
+Reset
+</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<div class="card">
+    <h2>Free Online Percentage Calculator</h2>
+
+    <p>
+        Use our free Percentage Calculator to quickly calculate percentages
+        of any number. Find a percentage of a number easily and accurately
+        without manual calculations.
+    </p>
+
+    <p>
+        Whether you need to calculate discounts, increases, tips or everyday
+        percentages, ToolNest makes percentage calculations simple and fast.
+    </p>
+</div>
+
+
+
+<script>
+
+function calculate() {
+
+    let percent =
+    document.getElementById("percent").value;
+
+    let number =
+    document.getElementById("number").value;
+
+    if (percent === "" || number === "") {
+
+        document.getElementById("result").innerHTML =
+        "Please enter values.";
+
+        return;
+    }
+
+    let answer =
+    (percent / 100) * number;
+
+    document.getElementById("result").innerHTML =
+    percent + "% of " + number + " = " + answer;
+
+}
+
+function resetCalculator() {
+
+    document.getElementById("percent").value = "";
+
+    document.getElementById("number").value = "";
+
+    document.getElementById("result").innerHTML = "";
+
+}
+
+</script>
+
+</body>
+
+</html>
+```

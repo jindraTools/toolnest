@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lucky Number Generator - Free Lucky Numbers | ToolNest</title>
+<meta name="description" content="Generate lucky numbers instantly with our free Lucky Number Generator. Create random numbers for fun, games and lottery picks.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<a class="button" href="index.html">🏠 Home</a>
+
+
+<div class="calculator">
+
+
+<h1>🎰 Lucky Number Generator</h1>
+
+<p>
+Generate random lucky numbers for popular lotteries.
+</p>
+
+
+<label>Select Lottery</label>
+
+<select id="lottery">
+
+<option value="uk">🇬🇧 UK Lotto</option>
+<option value="euromillions">🇪🇺 EuroMillions</option>
+
+</select>
+
+
+<br><br>
+
+
+<button class="button" onclick="generateNumbers()">
+🎲 Generate Numbers
+</button>
+
+<button class="button" onclick="copyNumbers()">
+📋 Copy Numbers
+</button>
+
+
+<button class="button" onclick="resetNumbers()">
+Reset
+</button>
+
+
+<div id="result" class="result-box"></div>
+
+
+</div>
+
+<div class="card">
+    <h2>Free Lucky Number Generator</h2>
+
+    <p>
+        Generate lucky numbers for fun with our free Lucky Number Generator.
+        Choose between UK Lotto and EuroMillions and create a random set of numbers.
+    </p>
+
+    <p>
+        The generator creates random numbers for entertainment and lottery picks.
+        Lottery numbers are completely random, so every combination has the same chance
+        of being selected.
+    </p>
+</div>
+
+</div>
+
+
+<script>
+
+function generateNumbers(){
+
+let lottery = document.getElementById("lottery").value;
+
+let result = document.getElementById("result");
+
+
+if(lottery === "uk"){
+
+let numbers = [];
+
+while(numbers.length < 6){
+
+let number = Math.floor(Math.random() * 59) + 1;
+
+if(!numbers.includes(number)){
+numbers.push(number);
+}
+
+}
+
+numbers.sort((a,b)=>a-b);
+
+
+result.innerHTML =
+"<h3>🇬🇧 UK Lotto</h3>" +
+numbers.map(n => `<span class="number-ball">${n}</span>`).join("")
+
+}
+
+
+
+else if(lottery === "euromillions"){
+
+
+let main = [];
+
+while(main.length < 5){
+
+let number = Math.floor(Math.random() * 50) + 1;
+
+if(!main.includes(number)){
+main.push(number);
+}
+
+}
+
+
+main.sort((a,b)=>a-b);
+
+
+
+let stars = [];
+
+while(stars.length < 2){
+
+let star = Math.floor(Math.random() * 12) + 1;
+
+if(!stars.includes(star)){
+stars.push(star);
+}
+
+}
+
+
+stars.sort((a,b)=>a-b);
+
+
+
+result.innerHTML =
+"<h3>🇪🇺 EuroMillions</h3>" +
+"Main Numbers:<br>" +
+main.map(n => `<span class="number-ball">${n}</span>`).join("") +
+"<br><br>" +
+"⭐ Lucky Stars:<br>" +
+stars.map(n => `<span class="star-ball">${n}</span>`).join("")
+
+}
+
+
+}
+
+
+function resetNumbers(){
+
+document.getElementById("result").innerHTML = "";
+
+}
+
+function copyNumbers(){
+
+let balls = document.querySelectorAll(".number-ball");
+
+let stars = document.querySelectorAll(".star-ball");
+
+let text = document.getElementById("result").querySelector("h3").innerText + "\n\n";
+
+
+if(balls.length > 0){
+
+text += "Numbers: ";
+
+balls.forEach(ball => {
+    text += ball.innerText + " ";
+});
+
+}
+
+
+if(stars.length > 0){
+
+text += "\n\nLucky Stars: ";
+
+stars.forEach(star => {
+    text += star.innerText + " ";
+});
+
+}
+
+
+navigator.clipboard.writeText(text);
+
+alert("Numbers copied!");
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>

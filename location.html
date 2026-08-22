@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Location QR Code Generator - Free Online | ToolNest</title>
+<meta name="description" content="Create a QR code for your location quickly and easily with our free online Location QR Code Generator.">
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>
+
+<div class="calculator">
+
+<h1>📍 My Location</h1>
+
+<p>Find your current location and view it on a map.</p>
+
+<button class="button" onclick="findLocation()">
+📍 Find My Location
+</button>
+
+<div id="locationResult" class="result-box"></div>
+
+</div>
+
+<script>
+
+function findLocation() {
+
+    if (!navigator.geolocation) {
+
+        alert("Geolocation is not supported by your browser.");
+        return;
+
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+
+            let mapUrl =
+                `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+            document.getElementById("locationResult").innerHTML =
+
+                `<strong>Latitude:</strong> <span id="latitude">${latitude}</span><br><br>` +
+
+                `<strong>Longitude:</strong> <span id="longitude">${longitude}</span><br><br>` +
+
+                `<a class="button" href="${mapUrl}" target="_blank">
+                🗺️ Open in Google Maps
+                </a>
+
+                <br><br>
+
+                <strong>📱 Scan to open this location:</strong>
+
+                <div id="qrcode" style="margin-top:15px;"></div>
+
+                <br>
+
+                <button class="button" onclick="copyLocation()">
+                📋 Copy Location
+                </button>
+
+                <button class="button" onclick="downloadQR()">
+                💾 Download QR
+                </button>`;
+
+            new QRCode(
+                document.getElementById("qrcode"),
+                {
+                    text: mapUrl,
+                    width: 200,
+                    height: 200
+                }
+            );
+
+        },
+
+        function() {
+
+            alert(
+                "Unable to get your location. Please allow location access."
+            );
+
+        }
+
+    );
+
+}
+
+
+function copyLocation() {
+
+    let latitude =
+        document.getElementById("latitude").innerText;
+
+    let longitude =
+        document.getElementById("longitude").innerText;
+
+    let text =
+        `Latitude: ${latitude}\nLongitude: ${longitude}`;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Location copied!");
+
+}
+
+
+function downloadQR() {
+
+    let qrCanvas =
+        document.querySelector("#qrcode canvas");
+
+    if (!qrCanvas) {
+
+        alert("Please find your location first.");
+        return;
+
+    }
+
+    let link =
+        document.createElement("a");
+
+    link.download = "my-location-qr.png";
+
+    link.href =
+        qrCanvas.toDataURL("image/png");
+
+    link.click();
+
+}
+
+</script>
+
+</body>
+
+</html>

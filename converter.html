@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unit Converter - Free Online Unit Converter | ToolNest</title>
+<meta name="description" content="Convert length, weight, temperature, volume, speed and area units quickly with our free online Unit Converter.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="container">
+
+<h1>📏 Unit Converter</h1>
+
+<p>Convert units quickly and easily.</p>
+
+
+
+</div>
+
+</header>
+
+
+<div class="calculator">
+<div style="text-align:center; margin-bottom:10px;">
+    <a class="button" href="index.html">🏠 Home</a>
+</div>   
+
+
+<h2>Unit Converter</h2>
+
+
+<label>Category</label>
+
+<select id="category" onchange="changeUnits()">
+
+<option value="length">📏 Length</option>
+<option value="weight">⚖️ Weight</option>
+<option value="temperature">🌡 Temperature</option>
+<option value="volume">💧 Volume</option>
+<option value="speed">🚗 Speed</option>
+<option value="area">📐 Area</option>  
+</select>
+  
+
+
+
+<label>Value</label>
+
+<input type="number" id="value" placeholder="Enter value">
+
+
+
+<label>From</label>
+
+<select id="from"></select>
+<button class="swap-button" onclick="swapUnits()">🔄 Swap</button>
+
+
+
+
+<label>To</label>
+
+<select id="to"></select>
+
+
+
+<button onclick="convert()">Convert</button>
+
+<button onclick="resetConverter()">Reset</button>
+
+<div id="result" class="result">
+    Result will appear here
+</div>
+
+
+</div>
+
+<div class="card">
+<h2>Free Online Unit Converter</h2>
+<p>
+Convert units quickly and accurately with our free online converter.
+You can convert length, weight, temperature, volume, speed and area units.
+Whether you need to convert kilometres to miles, kilograms to pounds,
+or Celsius to Fahrenheit, ToolNest makes everyday conversions simple.
+</p>
+
+</div>
+
+
+<div class="card">
+<footer>
+
+<p>© 2026 ToolNest | Free online tools</p>
+
+</footer>
+</div>
+
+
+<script src="converter.js"></script>
+
+<br>
+
+
+</div>
+<div class="seo-text">
+    <h2>Free Online Unit Converter</h2>
+
+    <p>
+        Our free Unit Converter helps you quickly convert between different units of measurement.
+        Convert length, weight, temperature, volume, speed and area units instantly.
+    </p>
+
+    <p>
+        Whether you need to convert kilograms to pounds, centimeters to inches,
+        Celsius to Fahrenheit or other common measurements, ToolNest provides
+        fast and accurate results directly in your browser.
+    </p>
+</div>
+
+</body>
+
+</html>

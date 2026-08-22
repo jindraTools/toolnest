@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Name Generator - Free Name Generator | ToolNest</title>
+<meta name="description" content="Generate random names quickly and easily with our free online Random Name Generator. Create names for characters, stories, games and more.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="margin:20px;">
+
+<a class="button" href="index.html">🏠 Home</a>
+
+</div>    
+
+<div class="calculator">
+
+<h1>👤 Random Name Generator</h1>
+
+<p>Generate random names instantly.</p>
+
+<label>Gender</label>
+
+<select id="gender">
+
+<option value="any">Any</option>
+
+<option value="male">Male</option>
+
+<option value="female">Female</option>
+
+</select>
+
+<label>How Many Names?</label>
+
+<input type="number" id="quantity" value="5" min="1" max="20">
+
+<br>
+
+<button class="button" onclick="generateNames()">🎲 Generate Names</button>
+
+<button class="button" onclick="copyNames()">📋 Copy Names</button>
+
+<button class="button" onclick="resetNames()">🔄 Reset</button>
+
+<div id="nameResult" class="result-box"></div>
+
+</div>
+
+<div class="card">
+    <h2>Free Random Name Generator</h2>
+
+    <p>
+        Generate random names quickly and easily with our free Random Name Generator.
+        Choose male, female or any names and select how many names you want to generate.
+    </p>
+
+    <p>
+        Use the generator to create names for characters, stories, games,
+        role-playing projects and other creative ideas.
+    </p>
+</div>
+
+<br>
+
+
+
+<script>
+
+const maleNames = [
+"Oliver","George","Harry","Jack","Jacob","Noah","Charlie","Thomas","Oscar","William",
+"Leo","Alfie","Henry","Freddie","Archie","Theo","Isaac","James","Joshua","Alexander",
+"Edward","Lucas","Max","Daniel","Arthur","Joseph","Finley","Teddy","Theodore","Benjamin",
+"Alfred","Adam","Dylan","Riley","Harrison","Sebastian","Elijah","Arlo","Hugo","Luca",
+"Reuben","Jaxon","Reggie","Harvey","Frederick","Jude","Harley","Lewis","Frankie","Ethan",
+"Samuel","David","Mohammed","Logan","Louis","Elliot","Mason","Rory","Oscar","Felix",
+"Finley","Tom","Albert","Charlie","James","William","Henry","Archie","Harry","George",
+"Oliver","Noah","Jack","Leo","Arthur","Thomas","Edward","Theo","Max","Lucas",
+"George","Harry","Oliver","Jack","Noah","Charlie","Henry","Oscar","Leo","Alfie",
+"Freddie","Archie","Theo","Isaac","James","Joshua","Alexander","Edward","Lucas","Daniel"
+];
+
+const femaleNames = [
+"Olivia","Amelia","Isla","Emily","Ava","Isabella","Lily","Sophia","Mia","Grace",
+"Poppy","Ella","Charlotte","Sophie","Jessica","Ruby","Florence","Evie","Rosie","Sienna",
+"Freya","Daisy","Alice","Phoebe","Ivy","Elsie","Isabelle","Sofia","Willow","Evelyn",
+"Matilda","Maya","Layla","Esme","Elizabeth","Ella","Chloe","Ellie","Harper","Lola",
+"Isabel","Millie","Lucy","Bonnie","Maisie","Eleanor","Willow","Erin","Lottie","Holly",
+"Emilia","Abigail","Molly","Scarlett","Isabelle","Amber","Penelope","Elsie","Sofia","Rose",
+"Florence","Freya","Daisy","Alice","Phoebe","Ivy","Isla","Amelia","Olivia","Emily",
+"Ava","Mia","Grace","Ella","Sophie","Ruby","Jessica","Charlotte","Lily","Poppy",
+"Evie","Rosie","Sienna","Freya","Daisy","Alice","Phoebe","Ivy","Evelyn","Matilda",
+"Maya","Layla","Esme","Elizabeth","Chloe","Ellie","Harper","Lola","Lucy","Bonnie"
+];
+
+function generateNames(){
+
+    let gender = document.getElementById("gender").value;
+
+    let quantity = Number(document.getElementById("quantity").value);
+
+    let names;
+
+    if(gender === "male"){
+
+        names = [...new Set(maleNames)];
+
+    }
+
+    else if(gender === "female"){
+
+        names = [...new Set(femaleNames)];
+
+    }
+
+    else{
+
+        names = [...new Set([...maleNames, ...femaleNames])];
+
+    }
+
+    if(quantity > names.length){
+
+        alert("There are not enough different names available.");
+
+        return;
+
+    }
+
+    let result = [];
+
+    while(result.length < quantity){
+
+        let randomIndex = Math.floor(Math.random() * names.length);
+
+        result.push(names[randomIndex]);
+
+        names.splice(randomIndex, 1);
+
+    }
+
+    document.getElementById("nameResult").innerHTML =
+    "Your Names:<br><br>" +
+    result.map(name => `<span>${name}</span>`).join("<br>");
+
+}
+
+function resetNames(){
+
+    document.getElementById("nameResult").innerHTML = "";
+
+    document.getElementById("gender").value = "any";
+
+    document.getElementById("quantity").value = 5;
+
+}
+
+function copyNames(){
+
+    let result = document.getElementById("nameResult").innerText;
+
+    if(!result){
+
+        alert("Generate names first!");
+
+        return;
+
+    }
+
+    navigator.clipboard.writeText(result);
+
+    alert("Names copied!");
+
+}
+
+</script>
+
+</body>
+
+</html>

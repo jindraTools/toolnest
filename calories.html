@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calorie Calculator - Free Daily Calorie Calculator | ToolNest</title>
+<meta name="description" content="Calculate your estimated daily calorie needs with our free online Calorie Calculator. Quick and easy to use.">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+<a class="button" href="index.html">🏠 Home</a>
+<div class="calculator">
+
+<h1>🔥 Calories Calculator</h1>
+
+<p>Calculate your daily calorie needs.</p>
+
+
+<label>Age</label>
+<input type="number" id="age" placeholder="Enter your age">
+
+
+<label>Gender</label>
+<select id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+</select>
+
+
+<label>Weight (kg)</label>
+<input type="number" id="weight" placeholder="Enter your weight">
+
+
+<label>Height (cm)</label>
+<input type="number" id="height" placeholder="Enter your height">
+
+
+<label>Activity level</label>
+<select id="activity">
+
+    <option value="1.2">Little or no exercise</option>
+    <option value="1.375">Light exercise</option>
+    <option value="1.55">Moderate exercise</option>
+    <option value="1.725">Heavy exercise</option>
+    <option value="1.9">Very heavy exercise</option>
+
+</select>
+
+
+<br><br>
+
+<button onclick="calculateCalories()">Calculate</button>
+
+<button onclick="resetCalories()">🔄 Reset</button>
+
+<div id="result" class="result-box"></div>
+
+<br>
+
+</div>
+
+<div class="card">
+    <h2>Free Daily Calorie Calculator</h2>
+
+    <p>
+        Use our free Calorie Calculator to estimate your daily calorie needs.
+        Enter your age, gender, weight, height and activity level to get a quick estimate.
+    </p>
+
+    <p>
+        Daily calorie requirements vary from person to person depending on body size,
+        age and activity level. ToolNest helps you calculate your estimated calorie needs
+        in just a few seconds.
+    </p>
+</div>
+
+<script src="calories.js"></script>
+</body>
+
+</html>
